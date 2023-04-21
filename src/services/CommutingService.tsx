@@ -1,8 +1,22 @@
+import { CommutingModel, Metro } from "../models/commuting.model";
+
 class CommutingService {
-    static setCommuting() {
-        return fetch('https://api.sl.se/api2/realtimedeparturesV4.json?key=76239c02cf7d4b2a86c31d3434bb16e1&siteid=9119&timewindow=15')
+    static getCommuting() {
+        return fetch('http://localhost:9017/api/departures')
         .then(response => response.json())
         .then(data => {
+            const commuting : CommutingModel = {
+                ResponseData : {
+                    Metros : data.ResponseData.Metros.map( (metro : Metro) => {
+                        return {
+                            DisplayTime : metro.DisplayTime,
+                            LineNumber: metro.LineNumber,
+                            Destination: metro.Destination
+                        }
+                    })
+                }
+            }
+            console.log(data);
             return data;
         })
         .catch(error => {

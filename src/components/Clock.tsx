@@ -15,7 +15,7 @@ const Clock: React.FC<ClockProps> = () => {
 
   return (
     <div>
-      <h2>{time.toLocaleTimeString()}</h2>
+      <p style={{fontSize: "35px"}}>{time.toLocaleTimeString()}</p>
     </div>
   );
 };

@@ -31,7 +31,7 @@ function App() {
           <ReactSVG src="/Knowit_logo.svg" />
         </Box>
       </header>
-      <Grid container spacing={2}>
+      <Grid container spacing={2} columns={12}>
         <Grid item xs={6} md={8}>
           <Item>
             <h1>Väder</h1>
