@@ -1,10 +1,12 @@
 import { CommutingModel, Metro } from "../models/commuting.model";
+import { WeatherModel } from "../models/weather.model";
 
-class CommutingService {
-    static getCommuting() {
-        return fetch('http://localhost:9017/api/departures')
+class WeatherService {
+    static getWeather() {
+        return fetch('http://localhost:9017/api/weather')
         .then(response => response.json())
         .then(data => {
+            console.log(data);
             return data;
         })
         .catch(error => {
@@ -13,5 +15,5 @@ class CommutingService {
     }
 }
 
-export default CommutingService
+export default WeatherService
 

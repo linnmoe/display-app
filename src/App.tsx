@@ -10,6 +10,7 @@ import { ReactSVG } from "react-svg";
 import { Box } from "@mui/material";
 import Birthday from "./components/Birthday";
 import background from "./confetti.jpg";
+import Weather from "./components/Weather";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -38,6 +39,7 @@ function App() {
         <Grid item xs={6} md={8}>
           <Item>
             <h1>Väder</h1>
+            <Weather/>
           </Item>
         </Grid>
         <Grid item xs={6} md={4}>
