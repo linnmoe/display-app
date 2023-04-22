@@ -55,12 +55,12 @@ function App() {
         <Grid item xs={6} md={4}>
           <Item>
             <h1>Avgångar</h1>
-            {/* <Commuting /> */}
+            <Commuting />
           </Item>
         </Grid>
 
         <Grid item xs={6} md={8}>
-          <Item style={{backgroundImage: `url(${background})`, backgroundColor:''}}>
+          <Item style={{backgroundImage: `url(${background})`, backgroundSize: 'cover'}}>
             <h1>Kommande födelsedag</h1>
             <Birthday/>
           </Item>
