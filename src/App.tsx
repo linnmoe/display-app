@@ -8,6 +8,8 @@ import Paper from "@mui/material/Paper";
 import Commuting from "./components/Commuting";
 import { ReactSVG } from "react-svg";
 import { Box } from "@mui/material";
+import Birthday from "./components/Birthday";
+import background from "./confetti.jpg";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -39,7 +41,7 @@ function App() {
           </Item>
         </Grid>
         <Grid item xs={6} md={4}>
-          <Item>
+          <Item style={{backgroundColor:'rgb(220,237,222)'}}>
             <h1>Tid</h1>
             <Clock />
           </Item>
@@ -53,13 +55,14 @@ function App() {
         <Grid item xs={6} md={4}>
           <Item>
             <h1>Avgångar</h1>
-            <Commuting />
+            {/* <Commuting /> */}
           </Item>
         </Grid>
 
         <Grid item xs={6} md={8}>
-          <Item>
-            <h1>Födelsedagsbarn</h1>
+          <Item style={{backgroundImage: `url(${background})`, backgroundColor:''}}>
+            <h1>Kommande födelsedag</h1>
+            <Birthday/>
           </Item>
         </Grid>
       </Grid>
