@@ -50,7 +50,7 @@ const Birthday: React.FC = () => {
         </p>
         </div>
       ) : (
-        <p>Inga kommande födelsedar inom 3 månader</p>
+        <p>Inga kommande födelsedagar inom 3 månader</p>
       )}
     </div>
   );

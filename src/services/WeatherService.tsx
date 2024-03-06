@@ -1,5 +1,3 @@
-import { CommutingModel, Metro } from "../models/commuting.model";
-import { WeatherModel } from "../models/weather.model";
 
 class WeatherService {
     static getWeather() {

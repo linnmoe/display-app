@@ -9,6 +9,7 @@ import CelebrationIcon from '@mui/icons-material/Celebration';
 import GroupsIcon from '@mui/icons-material/Groups';
 
 const Event: React.FC = () => {
+    
     const [events, setEvents] = useState<EventModel[]>([
         {
             title: "Digitalt bolagsmöte",
