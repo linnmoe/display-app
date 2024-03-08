@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 import Clock from "./components/Clock";
-import Event from "./components/Event";
+import EventOverview from "./features/events/EventOverview";
 import { styled } from "@mui/material/styles";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
@@ -51,7 +51,7 @@ function App() {
         <Grid item xs={6} md={8}>
           <Item>
             <h1>Event</h1>
-            <Event />
+            <EventOverview />
           </Item>
         </Grid>
         <Grid item xs={6} md={4}>
