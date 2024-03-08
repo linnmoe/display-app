@@ -1,7 +1,7 @@
 import { Button, Container, Grid } from "@mui/material";
 import { useAppSelector } from "../../hooks";
 import { EventModel } from "../../models/event.model";
-import Event from "./Event";
+import ViewEvent from "./ViewEvent";
 import EditEvent from "./EditEvent";
 import EditIcon from '@mui/icons-material/Edit';
 import AddIcon from '@mui/icons-material/Add';
@@ -40,6 +40,7 @@ const EventOverview: React.FC = () => {
 
     return (
         <div>
+            <h1>Event</h1>
             <Container>
                 <Grid container spacing={2}>
                     {events.map((event, index) => (
@@ -50,7 +51,7 @@ const EventOverview: React.FC = () => {
                                 ) 
                                 : (
                                     <>
-                                        <Event event={event}/>
+                                        <ViewEvent event={event}/>
                                         <Button 
                                             variant="contained" 
                                             startIcon={ <EditIcon /> }

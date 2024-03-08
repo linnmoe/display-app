@@ -4,7 +4,7 @@ interface EventProps {
     event: EventModel;
 }
 
-const Event: React.FC<EventProps> = ({ event }) => {
+const ViewEvent: React.FC<EventProps> = ({ event }) => {
     return (
         <div>
             <h2>{event.title} {event.icon}</h2>
@@ -19,4 +19,4 @@ const Event: React.FC<EventProps> = ({ event }) => {
     );
 }
 
-export default Event;
+export default ViewEvent;

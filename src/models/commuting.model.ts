@@ -1,15 +1,16 @@
 export interface CommutingModel {
-    ResponseData: ResponseData;
+    responseData: ResponseData;
 }
 
 interface ResponseData {
-    Metros: Metro[]
+    metros: Metro[]
 }
 
 export interface Metro {
-    DisplayTime: string;
-    LineNumber: string;
-    Destination: string;
+    displayTime: string;
+    lineNumber: string;
+    destination: string;
+    stopAreaName: string;
 }
 
 export enum ColorEnum {
