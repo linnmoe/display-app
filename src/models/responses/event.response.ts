@@ -1,6 +1,6 @@
-export interface EventModel {
+export interface EventResponse {
     id: string;
     date: Date;
     title: string;
-    icon?: any;
+    icon: string;
 }

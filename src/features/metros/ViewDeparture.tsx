@@ -1,12 +1,12 @@
 import React from 'react'
-import { Metro } from '../../models/commuting.model'
 import { Grid, Avatar } from '@mui/material'
+import { DepartureResponse } from '../../models/commuting.model';
 
-interface MetroProps {
-    metro: Metro
+interface DepartureProps {
+    departure: DepartureResponse
 }
 
-const ViewMetro: React.FC<MetroProps> = ({ metro }) => {
+const ViewDeparture: React.FC<DepartureProps> = ({ departure }) => {
     const getLineColor = (lineNumber: string) => {
         switch (lineNumber) {
             case "10":
@@ -29,24 +29,24 @@ const ViewMetro: React.FC<MetroProps> = ({ metro }) => {
             <Grid item xs={2}>
                 <Avatar
                     variant="circular"
-                    style={{ backgroundColor: getLineColor(metro.lineNumber) }}
+                    style={{ backgroundColor: getLineColor(departure.line.designation) }}
                 >
                     {" "}
-                    {metro.lineNumber}{" "}
+                    {departure.line.designation}{" "}
                 </Avatar>
             </Grid>
             <Grid item xs={4}>
                 <p style={{ textAlign: "left", fontSize: "20px" }}>
-                    {metro.destination}
+                    {departure.destination}
                 </p>
             </Grid>
             <Grid item xs={4}>
                 <p style={{ fontSize: "20px" }}>
-                    {metro.displayTime}
+                    {departure.display}
                 </p>
             </Grid>
         </>
     )
 }
 
-export default ViewMetro
+export default ViewDeparture

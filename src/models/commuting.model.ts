@@ -1,20 +1,13 @@
-export interface CommutingModel {
-    responseData: ResponseData;
+export interface CommutingResponse {
+    departures: DepartureResponse[];
 }
 
-interface ResponseData {
-    metros: Metro[]
-}
-
-export interface Metro {
-    displayTime: string;
-    lineNumber: string;
+export interface DepartureResponse {
     destination: string;
-    stopAreaName: string;
+    display: string;
+    line: LineResponse;
 }
 
-export enum ColorEnum {
-    GREEN = 'green',
-    RED = 'red',
-    BLUE = 'blue'
+interface LineResponse {
+    designation: string;
 }

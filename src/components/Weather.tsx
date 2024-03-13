@@ -1,59 +1,48 @@
-import React, { useState, useEffect } from "react";
-import WeatherService from "../services/WeatherService";
-import { WeatherModel } from "../models/weather.model";
-import { Grid, Typography } from "@mui/material";
+import React from "react";
+import { CircularProgress, Grid, Typography } from "@mui/material";
+import { useGetWeatherQuery } from "../features/api/apiSlice";
 
 function Weather() {
-  const [weather, setWeather] = useState<WeatherModel>();
+  const {
+    data: weather,
+    isLoading,
+    isSuccess,
+    isError,
+    error
+  } = useGetWeatherQuery(undefined, { pollingInterval: 1_800_000 });
 
-  const fetchWeather = () => {
-    WeatherService.getWeather().then((data) => {
-      setWeather(data);
-    });
-  };
+  let content: JSX.Element | null = null;
 
-  useEffect(() => {
-    fetchWeather(); // call immediately
-    const intervalId = setInterval(fetchWeather, 1800000); // call every 30 seconds
-    return () => clearInterval(intervalId); // clean up on unmount
-  }, []);
-
-  return (
-    <Grid container spacing={2}>
-      <Grid item xs={12} sm={4}>
-        {weather ? (
+  if (isLoading) {
+    content = (<div>
+      <CircularProgress />
+    </div>);
+  } else if (isError) {
+    content = <div>Error fetching data</div>;
+  } else if (isSuccess && weather) {
+    content = (
+      <Grid container spacing={2}>
+        <Grid item xs={12} sm={4}>
           <div>
             <Typography variant="h4"><strong>{Math.round(weather.main.temp)}°</strong></Typography>
           </div>
-        ) : (
-          <div>
-            <Typography variant="h6">No weather data available</Typography>
-          </div>
-        )}
-      </Grid>
-      <Grid item xs={12} sm={4}>
-        {weather ? (
+        </Grid>
+        <Grid item xs={12} sm={4}>
           <div>
             <Typography variant="h5">{Math.round(weather.main.feels_like)}°</Typography>
           </div>
-        ) : (
-          <div>
-            <Typography variant="h6">No weather data available</Typography>
-          </div>
-        )}
-      </Grid>
-      <Grid item xs={12} sm={4}>
-        {weather ? (
+        </Grid>
+        <Grid item xs={12} sm={4}>
           <div>
             <Typography variant="h5">{weather.weather[0].description}</Typography>
           </div>
-        ) : (
-          <div>
-            <Typography variant="h6">No weather data available</Typography>
-          </div>
-        )}
+        </Grid>
       </Grid>
-    </Grid>
-  );
+    );
+  }
+
+  return <>
+    {content}
+  </>;
 }
 export default Weather;

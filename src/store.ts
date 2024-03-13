@@ -1,12 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
-import eventsReducer from "./features/events/eventsSlice";
-import metrosReducer from "./features/metros/metrosSlice";
+import { apiSlice } from "./features/api/apiSlice";
 
 export const store = configureStore({
     reducer: {
-        events: eventsReducer,
-        metros: metrosReducer
-    }
+        [apiSlice.reducerPath]: apiSlice.reducer
+    },
+    middleware: (getDefaultMiddleware) => 
+        getDefaultMiddleware().concat(apiSlice.middleware)
 });
 
 export type RootState = ReturnType<typeof store.getState>;

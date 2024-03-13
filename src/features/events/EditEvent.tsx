@@ -1,31 +1,29 @@
 import { Box, Button, TextField } from "@mui/material";
-import { EventModel } from "../../models/event.model";
+import { EventResponse } from "../../models/responses/event.response";
 import { useAppDispatch } from "../../hooks";
 import { useState } from "react";
-import { updateEvent } from "./eventsSlice";
+import { useUpdateEventMutation } from "./eventsSlice";
 
 interface EventProps {
-    event: EventModel;
-    onEventSave: (event: EventModel) => void;
+    event: EventResponse;
+    onEventSave: (event: EventResponse) => void;
 }
 
 const EditEvent: React.FC<EventProps> = ({ event, onEventSave }) => {
-    const dispatch = useAppDispatch();
+    const [updateEvent, { isLoading}] = useUpdateEventMutation();
+
     const [title, setTitle] = useState(event.title);
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        dispatch(updateEvent(
-            event.id,
-            title,
-            event.date,
-            event.icon
-        ));
-
-        setTitle("");
-
-        onEventSave(event);
+        try {
+            await updateEvent({id: event.id, title, date: event.date, icon: event.icon}).unwrap();
+            setTitle("");
+            onEventSave(event);
+        } catch (err) {
+            console.error(err);
+        }
     }
 
     const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

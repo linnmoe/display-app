@@ -5,7 +5,7 @@ import EventOverview from "./features/events/EventOverview";
 import { styled } from "@mui/material/styles";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
-import MetroOverview from "./features/metros/MetroOverview";
+import DepartureOverview from "./features/metros/DepartureOverview";
 import { ReactSVG } from "react-svg";
 import { Box } from "@mui/material";
 import Birthday from "./components/Birthday";
@@ -55,7 +55,7 @@ function App() {
         </Grid>
         <Grid item xs={6} md={4}>
           <Item>
-            <MetroOverview />
+            <DepartureOverview />
           </Item>
         </Grid>
 
