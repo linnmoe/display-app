@@ -23,7 +23,7 @@ const EventOverview: React.FC = () => {
     }
 
 
-    const handleEventSave = (event: EventResponse) => {
+    const handleEditEventClose = (event: EventResponse) => {
         const newEditableEvents = new Map(editableEvents);
         newEditableEvents.set(event.id, false);
 
@@ -41,8 +41,7 @@ const EventOverview: React.FC = () => {
         data: events,
         isLoading,
         isSuccess,
-        isError,
-        error
+        isError
     } = useGetEventsQuery();
 
     let content: JSX.Element | null = null;
@@ -63,7 +62,7 @@ const EventOverview: React.FC = () => {
                             <Grid key={index} item xs={12} md={6}>
                                 {editableEvents.get(event.id) 
                                     ? (
-                                        <EditEvent event={event} onEventSave={handleEventSave}/>
+                                        <EditEvent event={event} onClose={handleEditEventClose}/>
                                     ) 
                                     : (
                                         <>
@@ -72,7 +71,7 @@ const EventOverview: React.FC = () => {
                                                 variant="contained" 
                                                 startIcon={ <EditIcon /> }
                                                 onClick={() => handleEditButtonClick(event)}>
-                                                Edit
+                                                Ändra
                                             </Button>
                                         </>
                                     )
@@ -82,7 +81,7 @@ const EventOverview: React.FC = () => {
                         ))}
                     </Grid>
                     {addingNewEvent 
-                        ? <AddEvent onEventSave={() => setAddingNewEvent(false)} />
+                        ? <AddEvent onClose={() => setAddingNewEvent(false)} />
                         : (<Button variant="contained" startIcon={ <AddIcon /> } onClick={() => setAddingNewEvent(true)}>Lägg till event</Button>) 
                     }
                 </Container>

@@ -14,7 +14,7 @@ import CodeIcon from '@mui/icons-material/Code';
 
 
 
-const AddEvent: React.FC<any> = ({ onEventSave }) => {
+const AddEvent: React.FC<any> = ({ onClose }) => {
     const [addNewEvent, { isLoading }] = useAddEventMutation();
 
     const [title, setTitle] = useState<string>('');
@@ -31,7 +31,7 @@ const AddEvent: React.FC<any> = ({ onEventSave }) => {
             setDate(new Date());
             setIcon('work');
 
-            onEventSave();
+            onClose();
         } catch (err) {
             console.error(err);
         }
@@ -81,7 +81,7 @@ const AddEvent: React.FC<any> = ({ onEventSave }) => {
                 )}  
             />
 
-            <Button variant="outlined">Avbryt</Button>
+            <Button variant="outlined" onClick={onClose}>Avbryt</Button>
             <Button type="submit" variant="contained">Spara</Button>
         </Box>
     )

@@ -1,14 +1,13 @@
 import React from "react";
 import { CircularProgress, Grid, Typography } from "@mui/material";
-import { useGetWeatherQuery } from "../features/api/apiSlice";
+import { useGetWeatherQuery } from "./weatherSlice";
 
 function Weather() {
   const {
     data: weather,
     isLoading,
     isSuccess,
-    isError,
-    error
+    isError
   } = useGetWeatherQuery(undefined, { pollingInterval: 1_800_000 });
 
   let content: JSX.Element | null = null;

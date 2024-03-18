@@ -1,15 +1,14 @@
 import { Box, Button, TextField } from "@mui/material";
 import { EventResponse } from "../../models/responses/event.response";
-import { useAppDispatch } from "../../hooks";
 import { useState } from "react";
 import { useUpdateEventMutation } from "./eventsSlice";
 
 interface EventProps {
     event: EventResponse;
-    onEventSave: (event: EventResponse) => void;
+    onClose: (event: EventResponse) => void;
 }
 
-const EditEvent: React.FC<EventProps> = ({ event, onEventSave }) => {
+const EditEvent: React.FC<EventProps> = ({ event, onClose }) => {
     const [updateEvent, { isLoading}] = useUpdateEventMutation();
 
     const [title, setTitle] = useState(event.title);
@@ -20,7 +19,7 @@ const EditEvent: React.FC<EventProps> = ({ event, onEventSave }) => {
         try {
             await updateEvent({id: event.id, title, date: event.date, icon: event.icon}).unwrap();
             setTitle("");
-            onEventSave(event);
+            onClose(event);
         } catch (err) {
             console.error(err);
         }
@@ -45,6 +44,7 @@ const EditEvent: React.FC<EventProps> = ({ event, onEventSave }) => {
                 value={title}
                 onChange={handleTitleChange}
             />
+            <Button variant="outlined" onClick={() => onClose(event)}>Avbryt</Button>
             <Button type="submit" variant="contained">Spara</Button>      
         </Box>
     )

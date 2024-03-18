@@ -2,15 +2,15 @@ import React from "react";
 import { Container, Grid } from "@mui/material";
 import ViewDeparture from "./ViewDeparture";
 import CircularProgress from '@mui/material/CircularProgress';
-import { useGetDeparturesQuery } from "../api/apiSlice";
+import { useGetDeparturesQuery } from "./departuresSlice";
+
 
 const DepartureOverview: React.FC = () => {
   const {
     data: departures,
     isLoading,
     isSuccess,
-    isError,
-    error
+    isError
   } = useGetDeparturesQuery(undefined, { pollingInterval: 30000 } );
 
   let content: JSX.Element | null = null;
