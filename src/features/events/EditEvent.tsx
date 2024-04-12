@@ -1,48 +1,50 @@
 import { Box, Button, TextField } from "@mui/material";
 import { EventResponse } from "../../models/responses/event.response";
-import { useState } from "react";
 import { useUpdateEventMutation } from "./eventsSlice";
+import { SubmitHandler, useForm } from "react-hook-form";
 
 interface EventProps {
     event: EventResponse;
     onClose: (event: EventResponse) => void;
 }
 
+interface FormData {
+    title: string;
+}
+
 const EditEvent: React.FC<EventProps> = ({ event, onClose }) => {
+    const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
+        defaultValues: {
+            title: event.title
+        }
+    });
+
     const [updateEvent, { isLoading}] = useUpdateEventMutation();
 
-    const [title, setTitle] = useState(event.title);
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-
+    const onSubmit: SubmitHandler<FormData> = async (data) => {
         try {
-            await updateEvent({id: event.id, title, date: event.date, icon: event.icon}).unwrap();
-            setTitle("");
+            await updateEvent({id: event.id, title: data.title, date: event.date, icon: event.icon}).unwrap();
             onClose(event);
         } catch (err) {
             console.error(err);
         }
     }
 
-    const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setTitle(e.target.value);
-    }
-
     return (
         <Box 
             component="form" 
-            onSubmit={handleSubmit}
+            onSubmit={handleSubmit(onSubmit)}
             sx={{ '& .MuiTextField-root': { m: 1, width: '25ch' } }}
             noValidate
             autoComplete="off"
         >
             <TextField
                 required
-                id="outlined-required"
                 label="Titel"
-                value={title}
-                onChange={handleTitleChange}
+                {...register("title", { required: 'Titel är obligatorisk', minLength: { value: 3, message: 'Titel måste vara minst 3 tecken långt' } })}
+                error={!!errors.title}
+                helperText={errors.title?.message}
             />
             <Button variant="outlined" onClick={() => onClose(event)}>Avbryt</Button>
             <Button type="submit" variant="contained">Spara</Button>      
