@@ -7,6 +7,8 @@ import EventOverview from "../features/events/EventOverview";
 import DepartureOverview from "../features/departures/DepartureOverview";
 import Birthday from "./Birthday";
 import background from "../confetti.jpg";
+import KitchenOccupancy from "./KitchenOccupancy";
+import { Stack } from "@mui/material";
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -14,7 +16,7 @@ const Item = styled(Paper)(({ theme }) => ({
     padding: theme.spacing(1),
     textAlign: "center",
     color: theme.palette.text.secondary,
-  }));
+}));
 
 export const Dashboard: React.FC = () => {
     return (
@@ -25,16 +27,25 @@ export const Dashboard: React.FC = () => {
                     <Weather />
                 </Item>
             </Grid>
+
             <Grid item xs={6} md={4}>
                 <Item style={{ backgroundColor: 'rgb(220,237,222)' }}>
                     <h1>Tid</h1>
                     <Clock />
                 </Item>
             </Grid>
+
             <Grid item xs={6} md={8}>
-                <Item>
-                    <EventOverview />
-                </Item>
+                <Stack  gap={10}>
+                    <Item>
+                        <h1>Lunchkaos</h1>
+                        <KitchenOccupancy />
+                    </Item>
+                    <Item>
+
+                        <EventOverview />
+                    </Item>
+                </Stack>
             </Grid>
             <Grid item xs={6} md={4}>
                 <Item>
@@ -48,6 +59,9 @@ export const Dashboard: React.FC = () => {
                     <Birthday />
                 </Item>
             </Grid>
+
+
+
         </Grid>
     )
 }
